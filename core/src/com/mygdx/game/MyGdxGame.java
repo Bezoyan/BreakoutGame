@@ -2,14 +2,21 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGdxGame extends ApplicationAdapter {
+	SpriteBatch batch;
+	Texture img;
+	float x;
+	float y;
 
 	@Override
 	public void create () {
-//		batch = new SpriteBatch();
-//		img = new Texture("badlogic.jpg");
+		batch = new SpriteBatch();
+		img = new Texture("badlogic.jpg");
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
 	}
@@ -20,9 +27,28 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-//		batch.begin();
-//		batch.draw(img, 0, 0);
-//		batch.end();
+
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			y = y + 4;
+		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			y = y - 4;
+		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			x = x - 4;
+		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			x = x + 4;
+		}
+
+
+
+		batch.begin();
+		batch.draw(img, 0, 0);
+		batch.end();
 	}
 
 	@Override
@@ -32,7 +58,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void dispose () {
-//		batch.dispose();
-//		img.dispose();
+		batch.dispose();
+		img.dispose();
 	}
 }

@@ -5,11 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+//	ShapeRenderer bat;
+	Sprite sprite;
 	float x;
 	float y;
 
@@ -17,37 +20,33 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
+//		bat = new ShapeRenderer();
+		sprite = new Sprite(img);
+		sprite.setPosition(
+				Gdx.graphics.getWidth() / 2 - sprite.getWidth() / 2,
+				Gdx.graphics.getHeight() / 2 - sprite.getHeight() / 2
+		);
 	}
 
 	@Override
 	public void render () {
+
+		if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
+			sprite.translateX(-1f);
+		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			sprite.translateX(1f);
+
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+			sprite.setPosition(Gdx.input.getX(), Gdx.input.getY());
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
 
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			y = y + 4;
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			y = y - 4;
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-			x = x - 4;
-		}
-
-		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			x = x + 4;
-		}
-
-
 
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(sprite, sprite.getX(), sprite.getY());
 		batch.end();
 	}
 

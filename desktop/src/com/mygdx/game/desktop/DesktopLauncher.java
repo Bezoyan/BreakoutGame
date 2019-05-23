@@ -7,10 +7,11 @@ import com.mygdx.game.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 720;
-		config.height = 480;
 		config.backgroundFPS = 60;
 		config.foregroundFPS = 60;
+		config.width = MyGdxGame.WIDTH;
+		config.height = MyGdxGame.HEIGHT;
+		config.resizable = true;
 		new LwjglApplication(new MyGdxGame(), config);
 
 
